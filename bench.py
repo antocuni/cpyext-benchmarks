@@ -1,5 +1,6 @@
 import time
 import simple
+from pypytools.jitview import JitView
 
 N = 10000000
 
@@ -8,13 +9,13 @@ def main():
     for i in xrange(N):
         simple.noargs()
     b = time.time()
-    print 'noargs: %.2f secs' % (b-a)
+    print 'noargs : %.2f secs' % (b-a)
     #
     a = time.time()
     for i in xrange(N):
         simple.onearg(None)
     b = time.time()
-    print 'onearg: %.2f secs' % (b-a)
+    print 'onearg : %.2f secs' % (b-a)
     #
     a = time.time()
     for i in xrange(N):
