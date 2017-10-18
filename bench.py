@@ -1,6 +1,6 @@
 import time
 import simple
-from pypytools.jitview import JitView
+#from pypytools.jitview import JitView
 
 N = 10000000
 
