@@ -4,29 +4,32 @@ import simple
 
 N = 10000000
 
-def main():
+def bench(name, obj):
     a = time.time()
     for i in xrange(N):
-        simple.noargs()
+        obj.noargs()
     b = time.time()
-    print 'noargs      : %.2f secs' % (b-a)
+    print '%s.noargs      : %.2f secs' % (name, b-a)
     #
     a = time.time()
     for i in xrange(N):
-        simple.onearg(None)
+        obj.onearg(None)
     b = time.time()
-    print 'onearg(None): %.2f secs' % (b-a)
+    print '%s.onearg(None): %.2f secs' % (name, b-a)
     #
     a = time.time()
     for i in xrange(N):
-        simple.onearg(i)
+        obj.onearg(i)
     b = time.time()
-    print 'onearg(i)   : %.2f secs' % (b-a)
+    print '%s.onearg(i)   : %.2f secs' % (name, b-a)
     #
     a = time.time()
     for i in xrange(N):
-        simple.varargs(None, None)
+        obj.varargs(None, None)
     b = time.time()
-    print 'varargs     : %.2f secs' % (b-a)
+    print '%s.varargs     : %.2f secs' % (name, b-a)
 
-main()
+
+bench('simple', simple)
+print
+bench(' Foo()', simple.Foo())
