@@ -1,33 +1,23 @@
-import time
+from util import Timer
 import simple
-#from pypytools.jitview import JitView
 
 N = 10000000
-
 def bench(name, obj):
-    a = time.time()
-    for i in xrange(N):
-        obj.noargs()
-    b = time.time()
-    print '%s.noargs      : %.2f secs' % (name, b-a)
+    with Timer('%s.noargs' % name):
+        for i in xrange(N):
+            obj.noargs()
     #
-    a = time.time()
-    for i in xrange(N):
-        obj.onearg(None)
-    b = time.time()
-    print '%s.onearg(None): %.2f secs' % (name, b-a)
+    with Timer('%s.onearg(None)' % name):
+        for i in xrange(N):
+            obj.onearg(None)
     #
-    a = time.time()
-    for i in xrange(N):
-        obj.onearg(i)
-    b = time.time()
-    print '%s.onearg(i)   : %.2f secs' % (name, b-a)
+    with Timer('%s.onearg(i)' % name):
+        for i in xrange(N):
+            obj.onearg(i)
     #
-    a = time.time()
-    for i in xrange(N):
-        obj.varargs(None, None)
-    b = time.time()
-    print '%s.varargs     : %.2f secs' % (name, b-a)
+    with Timer('%s.varargs' % name):
+        for i in xrange(N):
+            obj.varargs(None, None)
 
 
 bench('simple', simple)
