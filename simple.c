@@ -17,11 +17,29 @@ static PyObject* varargs(PyObject* self, PyObject* args)
     Py_RETURN_NONE;
 }
 
+
+static PyObject * Foo_getitem(PyObject *self, PyObject *key)
+{
+    Py_RETURN_NONE;
+}
+
+static Py_ssize_t Foo_len(PyObject *self)
+{
+    return 42;
+}
+
 static PyMethodDef SimpleMethods[] = {
     {"noargs", (PyCFunction)noargs, METH_NOARGS, ""},
     {"onearg", (PyCFunction)onearg, METH_O, ""},
     {"varargs", (PyCFunction)varargs, METH_VARARGS, ""},
     {NULL, NULL, 0, NULL}
+};
+
+
+static PyMappingMethods FooMapping = {
+	(lenfunc)Foo_len,
+	(binaryfunc)Foo_getitem,
+	NULL,
 };
 
 /* types */
@@ -43,7 +61,7 @@ static PyTypeObject Foo_Type = {
     0,                         /* tp_repr */
     0,                         /* tp_as_number */
     0,                         /* tp_as_sequence */
-    0,                         /* tp_as_mapping */
+    &FooMapping,               /* tp_as_mapping */
     0,                         /* tp_hash */
     0,                         /* tp_call */
     0,                         /* tp_str */
