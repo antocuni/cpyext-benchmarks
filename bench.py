@@ -2,34 +2,50 @@ from util import Timer
 import simple
 
 N = 10000000
-def bench(name, obj):
-    with Timer('%s.noargs' % name):
+def bench_module():
+    with Timer('simple.noargs'):
+        for i in xrange(N):
+            simple.noargs()
+
+    with Timer('simple.onearg(None)'):
+        for i in xrange(N):
+            simple.onearg(None)
+
+    with Timer('simple.onearg(i)'):
+        for i in xrange(N):
+            simple.onearg(i)
+
+    with Timer('simple.varargs'):
+        for i in xrange(N):
+            simple.varargs(None, None)
+
+
+def bench_type():
+    obj = simple.Foo()
+    with Timer('Foo().noargs'):
         for i in xrange(N):
             obj.noargs()
 
-    with Timer('%s.onearg(None)' % name):
+    with Timer('Foo().onearg(None)'):
         for i in xrange(N):
             obj.onearg(None)
 
-    with Timer('%s.onearg(i)' % name):
+    with Timer('Foo().onearg(i)'):
         for i in xrange(N):
             obj.onearg(i)
 
-    with Timer('%s.varargs' % name):
+    with Timer('Foo().varargs'):
         for i in xrange(N):
             obj.varargs(None, None)
 
-    if name == 'simple':
-        return
-
-    with Timer('len(%s)' % name):
+    with Timer('len(Foo())'):
         for i in xrange(N):
             len(obj)
 
-    with Timer('%s[0]' % name):
+    with Timer('Foo()[0]'):
         for i in xrange(N):
             obj[0]
 
-bench('simple', simple)
+bench_module()
 print
-bench('Foo()', simple.Foo())
+bench_type()
