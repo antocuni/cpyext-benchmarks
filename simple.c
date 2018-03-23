@@ -17,6 +17,15 @@ static PyObject* varargs(PyObject* self, PyObject* args)
     Py_RETURN_NONE;
 }
 
+static PyObject* allocate_int(PyObject* self, PyObject* args)
+{
+    return PyInt_FromLong(2048);
+}
+
+static PyObject* allocate_tuple(PyObject* self, PyObject* args)
+{
+    return Py_BuildValue("ii", 2048, 2049);
+}
 
 static PyObject * Foo_getitem(PyObject *self, PyObject *key)
 {
@@ -32,6 +41,8 @@ static PyMethodDef SimpleMethods[] = {
     {"noargs", (PyCFunction)noargs, METH_NOARGS, ""},
     {"onearg", (PyCFunction)onearg, METH_O, ""},
     {"varargs", (PyCFunction)varargs, METH_VARARGS, ""},
+    {"allocate_int", (PyCFunction)allocate_int, METH_NOARGS, ""},
+    {"allocate_tuple", (PyCFunction)allocate_tuple, METH_NOARGS, ""},
     {NULL, NULL, 0, NULL}
 };
 

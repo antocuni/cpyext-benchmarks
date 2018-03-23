@@ -15,5 +15,5 @@ class Timer(object):
     def __exit__(self, etype, evalue, tb):
         self.stop = time.time()
         _valgrind.lib.callgrind_stop()
-        name = self.name.ljust(20)
+        name = self.name.ljust(25)
         print '%s: %.2f secs' % (name, self.stop-self.start)

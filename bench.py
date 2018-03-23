@@ -19,6 +19,13 @@ def bench_module():
         for i in xrange(N):
             simple.varargs(None, None)
 
+    with Timer('simple.allocate_int'):
+        for i in xrange(N):
+            simple.allocate_int()
+
+    with Timer('simple.allocate_tuple'):
+        for i in xrange(N):
+            simple.allocate_tuple()
 
 def bench_type():
     obj = simple.Foo()
