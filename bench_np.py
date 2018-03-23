@@ -8,7 +8,7 @@ def bench_getitem():
     with Timer('getitem'):
         total = 0
         for i in xrange(N):
-            total += myarray[5]
+            myarray[5]
 
 def bench_mean():
     myarray = np.array([12.34])
