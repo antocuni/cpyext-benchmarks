@@ -1,0 +1,87 @@
+Benchmark results on my machine:
+Intel(R) Core(TM) i7 CPU 920  @ 2.67GHz
+
+
+CPython
+-------
+simple.noargs            : 0.68 secs
+simple.onearg(None)      : 0.74 secs
+simple.onearg(i)         : 0.73 secs
+simple.varargs           : 0.97 secs
+simple.allocate_int      : 0.75 secs
+simple.allocate_tuple    : 1.22 secs
+
+Foo().noargs             : 0.71 secs
+Foo().onearg(None)       : 0.75 secs
+Foo().onearg(i)          : 0.75 secs
+Foo().varargs            : 1.01 secs
+len(Foo())               : 0.55 secs
+Foo()[0]                 : 0.32 secs
+
+
+5.8.0
+------
+simple.noargs            : 1.75 secs
+simple.onearg(None)      : 2.16 secs
+simple.onearg(i)         : 4.63 secs
+simple.varargs           : 4.82 secs
+simple.allocate_int      : 4.36 secs
+simple.allocate_tuple    : 13.07 secs
+
+Foo().noargs             : 2.20 secs
+Foo().onearg(None)       : 2.73 secs
+Foo().onearg(i)          : 5.36 secs
+Foo().varargs            : 5.07 secs
+len(Foo())               : 2.67 secs
+Foo()[0]                 : 2.79 secs
+
+
+5.9.0
+------
+simple.noargs            : 0.24 secs
+simple.onearg(None)      : 0.31 secs
+simple.onearg(i)         : 2.41 secs
+simple.varargs           : 5.76 secs
+simple.allocate_int      : 2.54 secs
+simple.allocate_tuple    : 10.66 secs
+
+Foo().noargs             : 2.31 secs
+Foo().onearg(None)       : 2.70 secs
+Foo().onearg(i)          : 6.10 secs
+Foo().varargs            : 5.73 secs
+len(Foo())               : 2.68 secs
+Foo()[0]                 : 2.94 secs
+
+
+5.10.0
+-------
+simple.noargs            : 0.24 secs
+simple.onearg(None)      : 0.29 secs
+simple.onearg(i)         : 2.55 secs
+simple.varargs           : 4.72 secs
+simple.allocate_int      : 2.68 secs
+simple.allocate_tuple    : 10.13 secs
+
+Foo().noargs             : 2.08 secs
+Foo().onearg(None)       : 3.15 secs
+Foo().onearg(i)          : 5.64 secs
+Foo().varargs            : 5.04 secs
+len(Foo())               : 2.22 secs
+Foo()[0]                 : 2.31 secs
+
+
+6.0.0-alpha
+------------
+simple.noargs            : 0.34 secs
+simple.onearg(None)      : 0.36 secs
+simple.onearg(i)         : 0.44 secs
+simple.varargs           : 0.80 secs
+simple.allocate_int      : 1.37 secs
+simple.allocate_tuple    : 7.03 secs
+
+Foo().noargs             : 0.41 secs
+Foo().onearg(None)       : 0.39 secs
+Foo().onearg(i)          : 0.47 secs
+Foo().varargs            : 0.83 secs
+len(Foo())               : 0.28 secs
+Foo()[0]                 : 0.60 secs
