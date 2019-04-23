@@ -1,5 +1,9 @@
 #include <Python.h>
 
+#if PY_MAJOR_VERSION >= 3
+#define PyInt_FromLong PyLong_FromLong
+#endif
+
 /* module-level functions */
 
 static PyObject* noargs(PyObject* self, PyObject* args)
@@ -90,16 +94,44 @@ static PyTypeObject Foo_Type = {
     SimpleMethods,             /* tp_methods, reuse the same functions */
 };
 
+#if PY_MAJOR_VERSION >= 3
+static struct PyModuleDef moduledef = {
+    PyModuleDef_HEAD_INIT,
+    "simple",
+    "Module Doc",
+    -1,
+    SimpleMethods,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+};
+#define INITERROR return NULL
+
+PyMODINIT_FUNC
+PyInit_simple(void)
+
+#else
+#define INITERROR return
 PyMODINIT_FUNC
 initsimple(void)
+#endif
 {
     PyObject* m;
 
     Foo_Type.tp_new = PyType_GenericNew;
     if (PyType_Ready(&Foo_Type) < 0)
-        return;
-
+        INITERROR;
+#if PY_MAJOR_VERSION >= 3
+    m= PyModule_Create(&moduledef);
+#else
     m = Py_InitModule("simple", SimpleMethods);
+#endif
+    if (m == NULL)
+        INITERROR;
     Py_INCREF(&Foo_Type);
     PyModule_AddObject(m, "Foo", (PyObject *)&Foo_Type);
+#if PY_MAJOR_VERSION >=3
+    return m;
+#endif
 }
