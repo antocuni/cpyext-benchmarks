@@ -4,6 +4,7 @@ ffibuilder = FFI()
 ffibuilder.cdef("""
     void callgrind_start(void);
     void callgrind_stop(void);
+    int is_running_on_valgrind(void);
 """)
 
 
@@ -16,6 +17,10 @@ void callgrind_start(void) {
 void callgrind_stop(void) {
   CALLGRIND_STOP_INSTRUMENTATION;
   CALLGRIND_DUMP_STATS;
+}
+
+int is_running_on_valgrind(void) {
+  return RUNNING_ON_VALGRIND;
 }
 """,
     libraries=[])

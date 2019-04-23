@@ -2,6 +2,12 @@ from __future__ import absolute_import, division, print_function
 import time
 import _valgrind
 
+def get_N(n):
+    if _valgrind.lib.is_running_on_valgrind():
+        return n // 100
+    else:
+        return n
+
 class Timer(object):
 
     def __init__(self, name):

@@ -1,10 +1,11 @@
 import sys
 if sys.version_info[0] >=3:
     xrange = range
-from util import Timer
+from util import Timer, get_N
 import simple
 
-N = 10000000
+N = get_N(10000000)
+
 def bench_module():
     with Timer('simple.noargs'):
         for i in xrange(N):
